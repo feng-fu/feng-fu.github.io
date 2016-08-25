@@ -1,99 +1,289 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion">
 <head>
-  <meta charset="utf-8">
-  <title>jQuery的常见方法和ajax</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" content="#00796b">
-  <meta name="msapplication-TileColor" content="#4E8071"/>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
   
   
-  <link rel="alternative" href="/atom.xml" title="多彩" type="application/atom+xml">
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css"> 
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="$(document).ready()和window.onload 的区别
+$(document).ready()是等待页面的DOM结构完成后，开始执行括号内的代码，而window.onload则需要等待页面中包括图片在内的所有元素加载完成之后再执行。
+window.onload在一个页面中只能有一个，而$(document).ready()可以编写多个，并且都可以得以执行。
+$(document">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jQuery的常见方法和ajax">
+<meta property="og:url" content="http://yoursite.com/2016/08/24/jQuery的常用方法和ajax/index.html">
+<meta property="og:site_name" content="多彩">
+<meta property="og:description" content="$(document).ready()和window.onload 的区别
+$(document).ready()是等待页面的DOM结构完成后，开始执行括号内的代码，而window.onload则需要等待页面中包括图片在内的所有元素加载完成之后再执行。
+window.onload在一个页面中只能有一个，而$(document).ready()可以编写多个，并且都可以得以执行。
+$(document">
+<meta property="og:updated_time" content="2016-08-24T12:59:00.839Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jQuery的常见方法和ajax">
+<meta name="twitter:description" content="$(document).ready()和window.onload 的区别
+$(document).ready()是等待页面的DOM结构完成后，开始执行括号内的代码，而window.onload则需要等待页面中包括图片在内的所有元素加载完成之后再执行。
+window.onload在一个页面中只能有一个，而$(document).ready()可以编写多个，并且都可以得以执行。
+$(document">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: 'Author'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/24/jQuery的常用方法和ajax/"/>
+
+  <title> jQuery的常见方法和ajax | 多彩 </title>
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-cn">
 
-<body>
+  
 
-  <div id="container" class="container">
-    <div class="left-col">
-    <div class="intrude-less">
-  <header id="header" class="inner">
-    <a href="/" class="profilepic">
-      <img src="http://7xrcp8.com1.z0.glb.clouddn.com/avatar.png" class="block-select js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-	</a>
-	<p class="header-subtitle">来看看一个前端的路怎么走呀</p>
-    <nav class="header-menu">
-      <ul>
-        <li><a href="/archives">文章</a></li><li><a href="/categories/note">随笔</a></li><li><a href="/tags">标签</a></li><li><a href="/feedback">留言</a></li>
-      </ul>
-    </nav>
-  </header>				
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">多彩</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">来看看一个前端的路怎么走呀</p>
 </div>
 
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
 
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  <div class="intrude-less">
-    <header id="header" class="inner">
-      <a href="/" class="profilepic">
-        <img src="http://7xrcp8.com1.z0.glb.clouddn.com/avatar.png" class="block-select js-avatar" style="width: 100%;height: 100%;opacity: 1;">
-	  </a>
-	  <p class="header-subtitle">来看看一个前端的路怎么走呀</p>
-	  <nav class="header-menu">
-	    <ul>
-        <li><a href="/archives">文章</a></li><li><a href="/categories/note">随笔</a></li><li><a href="/tags">标签</a></li><li><a href="/feedback">留言</a></li><div class="clearfix"></div>
-		</ul>
-	  </nav>
-	</header>				
-  </div>
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
 </nav>
 
-      <div class="body-wrap">
-<article id="post-jQuery的常用方法和ajax" class="article article-type-post" itemscope itemprop="blogPost">
+ </div>
+    </header>
 
-   
-    
-    <div class="article-meta">
-      
-<div class="article-date">
-<span class="datetime-published-tag"> 2016-08-24 </span>
-</div>
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
 
+  <div id="posts" class="posts-expand">
+    
 
-    </div>
-    
-    
   
-  <div class="article-inner block-select">
   
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-    
-      <header class="article-header">
-        
-           
-  
-    <h1 class="article-title" itemprop="name">
-      jQuery的常见方法和ajax
-    </h1>
-  
+      <header class="post-header">
 
         
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                jQuery的常见方法和ajax
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">Veröffentlicht am</span>
+            <time itemprop="dateCreated" datetime="2016-08-24T19:39:14+08:00" content="2016-08-24">
+              2016-08-24
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
       </header>
-      
-      <div class="article-info article-info-post">
-        
+    
 
-        
-             <div class="clearfix"></div>
-        
-      </div>
+
+    <div class="post-body" itemprop="articleBody">
+
       
-    
-    
-    <div class="article-entry" itemprop="articleBody">
+      
+
       
         <h1 id="document-ready-和window-onload-的区别"><a href="#document-ready-和window-onload-的区别" class="headerlink" title="$(document).ready()和window.onload 的区别"></a>$(document).ready()和window.onload 的区别</h1><ol>
 <li>$(document).ready()是等待页面的DOM结构完成后，开始执行括号内的代码，而window.onload则需要等待页面中包括图片在内的所有元素加载完成之后再执行。</li>
@@ -117,66 +307,271 @@
 </ol>
 
       
+    </div>
+
+    <div>
       
-      
-        <div class="post-copyright">
-<p><a href="http://yoursite.com/2016/08/24/jQuery的常用方法和ajax/">本文</a>为原创，转载请遵守本站<a href="/copyright/">版权声明</a></p>
-<p class="updated-time" >更新于: </span>2016年8月24日 20:08</p>
-</div>
+        
 
       
     </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/25/hexo折腾记/" rel="prev" title="hexo折腾记">
+                hexo折腾记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
     
   </div>
-  
-    
-<nav id="article-nav" class="block-select">
-  
-    <a href="/2016/08/25/hexo折腾记/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">&lt;</strong>
-      <div class="article-nav-title">
+
+
+        </div>
         
-          hexo折腾记
-        
-      </div>
-    </a>
+          
   
-  
-</nav>
-
-
-  
-</article>
-
-
-
-
-
-</div>
-      <footer id="footer" class="block-select">
-  <div class="outer">
-    <div id="footer-info">
-      <div class="footer-left">&copy; 2015-2016
-        <a href="/aboutme/" class ="aboutme-foot-tag"> 封富</a>
-      </div>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
     </div>
   </div>
-</footer>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="封富" />
+          <p class="site-author-name" itemprop="name">封富</p>
+          <p class="site-description motion-element" itemprop="description">多彩 封富</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">2</span>
+              <span class="site-state-item-name">Artikel</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">Tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#document-ready-和window-onload-的区别"><span class="nav-number">1.</span> <span class="nav-text">$(document).ready()和window.onload 的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#node-html-和-node-text-的区别"><span class="nav-number">2.</span> <span class="nav-text">$node.html()和$node.text()的区别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#extend-的作用和用法"><span class="nav-number">3.</span> <span class="nav-text">$.extend 的作用和用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jQuery的链式调用是什么？"><span class="nav-number">4.</span> <span class="nav-text">jQuery的链式调用是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jQuery-ajax-中缓存怎样控制"><span class="nav-number">5.</span> <span class="nav-text">jQuery ajax 中缓存怎样控制?</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#jquery-中-data-函数的作用"><span class="nav-number">6.</span> <span class="nav-text">jquery 中 data 函数的作用</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
-    <script>
-	var ThemeXConfig = {fancybox: false,mathjax: false,animate: false,isHome: false,isPost: true,isArchive: false,isTag: false,isCategory: false,open_in_new: false, CDN_PATH: '' }
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">封富</span>
+</div>
+
+<div class="powered-by">
+  Erstellt mit  <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
 </script>
 
 
-    <script src="/js/jquery-1.9.1.min.js"></script>
-    <script src="/js/base.js"></script>
-    <script src="/js/jquery.lazyload.min.js"></script>
 
 
 
 
 
-  </div>
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
 </body>
 </html>
