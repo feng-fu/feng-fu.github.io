@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>多彩</title>
+  <title>hexo折腾记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#00796b">
   <meta name="msapplication-TileColor" content="#4E8071"/>
@@ -52,11 +52,19 @@
 </nav>
 
       <div class="body-wrap">
-  
-    
 <article id="post-hexo折腾记" class="article article-type-post" itemscope itemprop="blogPost">
 
    
+    
+    <div class="article-meta">
+      
+<div class="article-date">
+<span class="datetime-published-tag"> 2016-08-25 </span>
+</div>
+
+
+    </div>
+    
     
   
   <div class="article-inner block-select">
@@ -67,13 +75,25 @@
         
            
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/25/hexo折腾记/">hexo折腾记</a>
+    <h1 class="article-title" itemprop="name">
+      hexo折腾记
     </h1>
   
 
         
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud block-select">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo-github-折腾/">hexo github 折腾</a></li></ul>
+	</div>
+
+
+        
+             <div class="clearfix"></div>
+        
+      </div>
       
     
     
@@ -98,79 +118,34 @@
       
       
       
+        <div class="post-copyright">
+<p><a href="http://yoursite.com/2016/08/25/hexo折腾记/">本文</a>为原创，转载请遵守本站<a href="/copyright/">版权声明</a></p>
+<p class="updated-time" >更新于: </span>2016年8月25日 22:08</p>
+</div>
+
+      
     </div>
     
   </div>
+  
+    
+<nav id="article-nav" class="block-select">
+  
+  
+    <a href="/2016/08/24/jQuery的常用方法和ajax/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">jQuery的常见方法和ajax</div>
+      <strong class="article-nav-caption">&gt;</strong>
+    </a>
+  
+</nav>
+
+
   
 </article>
 
 
 
 
-
-  
-    
-<article id="post-jQuery的常用方法和ajax" class="article article-type-post" itemscope itemprop="blogPost">
-
-   
-    
-  
-  <div class="article-inner block-select">
-  
-    
-    
-      <header class="article-header">
-        
-           
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/24/jQuery的常用方法和ajax/">jQuery的常见方法和ajax</a>
-    </h1>
-  
-
-        
-      </header>
-      
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="document-ready-和window-onload-的区别"><a href="#document-ready-和window-onload-的区别" class="headerlink" title="$(document).ready()和window.onload 的区别"></a>$(document).ready()和window.onload 的区别</h1><ol>
-<li>$(document).ready()是等待页面的DOM结构完成后，开始执行括号内的代码，而window.onload则需要等待页面中包括图片在内的所有元素加载完成之后再执行。</li>
-<li>window.onload在一个页面中只能有一个，而$(document).ready()可以编写多个，并且都可以得以执行。</li>
-<li>$(document).ready()可以简写为$()</li>
-</ol>
-<h1 id="node-html-和-node-text-的区别"><a href="#node-html-和-node-text-的区别" class="headerlink" title="$node.html()和$node.text()的区别"></a>$node.html()和$node.text()的区别</h1><p>$node.html()在获取元素方面对等于原生DOM中的innerHTML()方法，也就是获取node元素中的所有html元素，当在括号内对内容进行设置的时候，可以使用标签，并且这些使用的标签能够得到渲染。<br>$node.text()在获取元素方面对等于原生DOM中的innerText()方法，它所获取到的只是node元素中的所有文本内容，如果在对text进行设置时使用了标签，这些标签不会被渲染，而是直接以文本的形式存储在node元素中。</p>
-<h1 id="extend-的作用和用法"><a href="#extend-的作用和用法" class="headerlink" title="$.extend 的作用和用法"></a>$.extend 的作用和用法</h1><ul>
-<li><p><code>$.extend(object)</code>:为jQuery添加一个方法： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">$.extend(&#123;</div><div class="line">	sum:function(a,b)&#123;return a + b;&#125;,</div><div class="line">	dif:function(a,b)&#123;return a - b;&#125;</div><div class="line">&#125;) // 这两个方法能够直接使用jQuery的调用方式进行调用</div><div class="line">$.sum(2,3) // 5</div><div class="line">$.dif(3,2) // 1</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>$.extend([deep,]target[,object1][,objectN])</code><br>当我们提供两个或福讴歌对象给$.extend()，对象的所有属性都会被添加给target参数</p>
-</li>
-<li>使用中，我们一般讲extend的第一个参数设置为一个空对象，作为目标对象，这样能够保留源对象的值，将返回值赋给新的对象即可<br><code>var obj = $.extend({},obj1,obj2);</code><br>它的工作机制是，如果后一个对象含有一个前一个参数没有，或者前一个参数有，但是值不相同的键值对时，它就会新增或覆盖掉前一个键值对，从而达到深拷贝的目的</li>
-</ul>
-<h1 id="jQuery的链式调用是什么？"><a href="#jQuery的链式调用是什么？" class="headerlink" title="jQuery的链式调用是什么？"></a>jQuery的链式调用是什么？</h1><p>jQuery将点语法引入其中，让自己的每一个方法都具有返回值，这个返回值又能够去调用下一个方法，并再得到返回值，两两之间使用”.”作为连接，称为jQuery的链式调用，这种调用方式减少代码的行数，加快运行速度。</p>
-<h1 id="jQuery-ajax-中缓存怎样控制"><a href="#jQuery-ajax-中缓存怎样控制" class="headerlink" title="jQuery ajax 中缓存怎样控制?"></a>jQuery ajax 中缓存怎样控制?</h1><p>在jQuery传入的参数中，有一个cache，它的值默认为true(在数据类型为script和jsonp的时候，则默认为false)，当这个值为true的时候，就启用了缓存，在下次发送相同的请求时，浏览器就不会再向服务器去发送请求，而是直接从缓存中获取数据。<br>当cache为false的时候，相当于给每个ajax请求加了一个时间戳，由于这个时间戳的存在，所以每次发送请求的地址都是不相同的，这时候，就不会缓存文件了。<br>类似传入的数据<code>datastr += &#39;_t=&#39; + new Date().getTime();</code>的形式</p>
-<h1 id="jquery-中-data-函数的作用"><a href="#jquery-中-data-函数的作用" class="headerlink" title="jquery 中 data 函数的作用"></a>jquery 中 data 函数的作用</h1><ol>
-<li>用法<br>.data(key,value)<br>其中key为一个字符串，是用户存储数据的名称<br>value可以是undefined之外的任何类型数据<br>也可以使用.data(obj)，将键值对的key和value存储其中</li>
-<li>好处<br>.data()方法允许我们在DOM元素上绑定任意类型的数据，避免了循环引用的内存泄漏风险<br>我们可以在一个元素上设置不同的值，之后进行获取<br>(使用.data()括号内不传入参数则表示获取所有存储的数据)</li>
-</ol>
-
-      
-      
-      
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-  
-  
 
 </div>
       <footer id="footer" class="block-select">
@@ -185,7 +160,7 @@
 
     </div>
     <script>
-	var ThemeXConfig = {fancybox: false,mathjax: false,animate: false,isHome: true,isPost: false,isArchive: false,isTag: false,isCategory: false,open_in_new: false, CDN_PATH: '' }
+	var ThemeXConfig = {fancybox: false,mathjax: false,animate: false,isHome: false,isPost: true,isArchive: false,isTag: false,isCategory: false,open_in_new: false, CDN_PATH: '' }
 </script>
 
 
