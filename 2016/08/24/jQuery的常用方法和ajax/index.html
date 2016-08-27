@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jQuery ajax," />
+  <meta name="keywords" content="jQuery,ajax," />
 
 
 
@@ -92,7 +92,7 @@ $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&
 <meta property="og:site_name" content="多彩">
 <meta property="og:description" content="$(document).ready()&amp;#x548C;window.onload &amp;#x7684;&amp;#x533A;&amp;#x522B;
 $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&amp;#x7684;DOM&amp;#x7ED3;&amp;#x6784;&amp;#x5B8C;&amp;#x6210;&amp;#x540E;&amp;#xFF0C;&amp;#x5F00;&amp;#x59CB;">
-<meta property="og:updated_time" content="2016-08-27T04:10:54.164Z">
+<meta property="og:updated_time" content="2016-08-27T06:28:21.093Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="jQuery的常见方法和ajax">
 <meta name="twitter:description" content="$(document).ready()&amp;#x548C;window.onload &amp;#x7684;&amp;#x533A;&amp;#x522B;
@@ -302,7 +302,8 @@ $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&
         <h1 id="document-ready-&#x548C;window-onload-&#x7684;&#x533A;&#x522B;"><a href="#document-ready-&#x548C;window-onload-&#x7684;&#x533A;&#x522B;" class="headerlink" title="$(document).ready()&#x548C;window.onload &#x7684;&#x533A;&#x522B;"></a>$(document).ready()&#x548C;window.onload &#x7684;&#x533A;&#x522B;</h1><ol>
 <li>$(document).ready()&#x662F;&#x7B49;&#x5F85;&#x9875;&#x9762;&#x7684;DOM&#x7ED3;&#x6784;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x62EC;&#x53F7;&#x5185;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x800C;window.onload&#x5219;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x9875;&#x9762;&#x4E2D;&#x5305;&#x62EC;&#x56FE;&#x7247;&#x5728;&#x5185;&#x7684;&#x6240;&#x6709;&#x5143;&#x7D20;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#x4E4B;&#x540E;&#x518D;&#x6267;&#x884C;&#x3002;</li>
 <li>window.onload&#x5728;&#x4E00;&#x4E2A;&#x9875;&#x9762;&#x4E2D;&#x53EA;&#x80FD;&#x6709;&#x4E00;&#x4E2A;&#xFF0C;&#x800C;$(document).ready()&#x53EF;&#x4EE5;&#x7F16;&#x5199;&#x591A;&#x4E2A;&#xFF0C;&#x5E76;&#x4E14;&#x90FD;&#x53EF;&#x4EE5;&#x5F97;&#x4EE5;&#x6267;&#x884C;&#x3002;</li>
-<li>$(document).ready()&#x53EF;&#x4EE5;&#x7B80;&#x5199;&#x4E3A;$()</li>
+<li>$(document).ready()&#x53EF;&#x4EE5;&#x7B80;&#x5199;&#x4E3A;$()<a id="more"></a>
+</li>
 </ol>
 <h1 id="node-html-&#x548C;-node-text-&#x7684;&#x533A;&#x522B;"><a href="#node-html-&#x548C;-node-text-&#x7684;&#x533A;&#x522B;" class="headerlink" title="$node.html()&#x548C;$node.text()&#x7684;&#x533A;&#x522B;"></a>$node.html()&#x548C;$node.text()&#x7684;&#x533A;&#x522B;</h1><p>$node.html()&#x5728;&#x83B7;&#x53D6;&#x5143;&#x7D20;&#x65B9;&#x9762;&#x5BF9;&#x7B49;&#x4E8E;&#x539F;&#x751F;DOM&#x4E2D;&#x7684;innerHTML()&#x65B9;&#x6CD5;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x83B7;&#x53D6;node&#x5143;&#x7D20;&#x4E2D;&#x7684;&#x6240;&#x6709;html&#x5143;&#x7D20;&#xFF0C;&#x5F53;&#x5728;&#x62EC;&#x53F7;&#x5185;&#x5BF9;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6807;&#x7B7E;&#xFF0C;&#x5E76;&#x4E14;&#x8FD9;&#x4E9B;&#x4F7F;&#x7528;&#x7684;&#x6807;&#x7B7E;&#x80FD;&#x591F;&#x5F97;&#x5230;&#x6E32;&#x67D3;&#x3002;<br>$node.text()&#x5728;&#x83B7;&#x53D6;&#x5143;&#x7D20;&#x65B9;&#x9762;&#x5BF9;&#x7B49;&#x4E8E;&#x539F;&#x751F;DOM&#x4E2D;&#x7684;innerText()&#x65B9;&#x6CD5;&#xFF0C;&#x5B83;&#x6240;&#x83B7;&#x53D6;&#x5230;&#x7684;&#x53EA;&#x662F;node&#x5143;&#x7D20;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x6587;&#x672C;&#x5185;&#x5BB9;&#xFF0C;&#x5982;&#x679C;&#x5728;&#x5BF9;text&#x8FDB;&#x884C;&#x8BBE;&#x7F6E;&#x65F6;&#x4F7F;&#x7528;&#x4E86;&#x6807;&#x7B7E;&#xFF0C;&#x8FD9;&#x4E9B;&#x6807;&#x7B7E;&#x4E0D;&#x4F1A;&#x88AB;&#x6E32;&#x67D3;&#xFF0C;&#x800C;&#x662F;&#x76F4;&#x63A5;&#x4EE5;&#x6587;&#x672C;&#x7684;&#x5F62;&#x5F0F;&#x5B58;&#x50A8;&#x5728;node&#x5143;&#x7D20;&#x4E2D;&#x3002;</p>
 <h1 id="extend-&#x7684;&#x4F5C;&#x7528;&#x548C;&#x7528;&#x6CD5;"><a href="#extend-&#x7684;&#x4F5C;&#x7528;&#x548C;&#x7528;&#x6CD5;" class="headerlink" title="$.extend &#x7684;&#x4F5C;&#x7528;&#x548C;&#x7528;&#x6CD5;"></a>$.extend &#x7684;&#x4F5C;&#x7528;&#x548C;&#x7528;&#x6CD5;</h1><ul>
@@ -341,7 +342,9 @@ $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&
       
         <div class="post-tags">
           
-            <a href="/tags/jQuery-ajax/" rel="tag">#jQuery ajax</a>
+            <a href="/tags/jQuery/" rel="tag">#jQuery</a>
+          
+            <a href="/tags/ajax/" rel="tag">#ajax</a>
           
         </div>
       
@@ -438,7 +441,7 @@ $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
