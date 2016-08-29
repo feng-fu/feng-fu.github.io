@@ -1,0 +1,642 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="闭包," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x8C08;&amp;#x8C08;&amp;#x95ED;&amp;#x5305;&amp;#x5BF9;&amp;#x4E8E;JavaScript&amp;#x800C;&amp;#x8A00;&amp;#xFF0C;&amp;#x867D;&amp;#x7136;&amp;#x6CA1;&amp;#x6709;&amp;#x5757;&amp;#x4F5C;&amp;#x7528;&amp;#x57DF;&amp;#x7684;&amp;#x6982;&amp;#x5FF5;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x67">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端之闭包">
+<meta property="og:url" content="http://yoursite.com/2016/08/05/闭包/index.html">
+<meta property="og:site_name" content="多彩">
+<meta property="og:description" content="&amp;#x8C08;&amp;#x8C08;&amp;#x95ED;&amp;#x5305;&amp;#x5BF9;&amp;#x4E8E;JavaScript&amp;#x800C;&amp;#x8A00;&amp;#xFF0C;&amp;#x867D;&amp;#x7136;&amp;#x6CA1;&amp;#x6709;&amp;#x5757;&amp;#x4F5C;&amp;#x7528;&amp;#x57DF;&amp;#x7684;&amp;#x6982;&amp;#x5FF5;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x67">
+<meta property="og:image" content="http://yoursite.com/2016/08/05/闭包/1.png">
+<meta property="og:image" content="http://yoursite.com/2016/08/05/闭包/2.jpg">
+<meta property="og:updated_time" content="2016-08-29T14:05:10.635Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端之闭包">
+<meta name="twitter:description" content="&amp;#x8C08;&amp;#x8C08;&amp;#x95ED;&amp;#x5305;&amp;#x5BF9;&amp;#x4E8E;JavaScript&amp;#x800C;&amp;#x8A00;&amp;#xFF0C;&amp;#x867D;&amp;#x7136;&amp;#x6CA1;&amp;#x6709;&amp;#x5757;&amp;#x4F5C;&amp;#x7528;&amp;#x57DF;&amp;#x7684;&amp;#x6982;&amp;#x5FF5;&amp;#xFF0C;&amp;#x4F46;&amp;#x662F;&amp;#x67">
+<meta name="twitter:image" content="http://yoursite.com/2016/08/05/闭包/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/05/闭包/"/>
+
+  <title> 前端之闭包 | 多彩 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">多彩</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                前端之闭包
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-05T21:18:00+08:00" content="2016-08-05">
+              2016-08-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="/2016/08/05/&#x95ED;&#x5305;/1.png" alt="closure"></p>
+<h1 id="&#x8C08;&#x8C08;&#x95ED;&#x5305;"><a href="#&#x8C08;&#x8C08;&#x95ED;&#x5305;" class="headerlink" title="&#x8C08;&#x8C08;&#x95ED;&#x5305;"></a>&#x8C08;&#x8C08;&#x95ED;&#x5305;</h1><p>&#x5BF9;&#x4E8E;JavaScript&#x800C;&#x8A00;&#xFF0C;&#x867D;&#x7136;&#x6CA1;&#x6709;&#x5757;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x51FD;&#x6570;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x82E5;&#x662F;&#x60F3;&#x4ECE;&#x5168;&#x5C40;&#x73AF;&#x5883;&#x4E0B;&#x53BB;&#x8BBF;&#x95EE;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5185;&#x7684;&#x5C40;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;&#x662F;&#x529E;&#x4E0D;&#x5230;&#x7684;&#xFF1B;&#x4F46;&#x662F;&#x6839;&#x636E;JavaScript&#x4E2D;&#x7684;&#x94FE;&#x5F0F;&#x4F5C;&#x7528;&#x57DF;&#x7684;&#x6982;&#x5FF5;&#xFF0C;&#x5B83;&#x662F;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#x5916;&#x9762;&#x7684;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#xFF0C;&#x9488;&#x5BF9;&#x4E00;&#x4E2A;&#x88AB;&#x5B9A;&#x4E49;&#x5728;&#x51FD;&#x6570;&#x5185;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x7684;&#x7236;&#x51FD;&#x6570;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x53D8;&#x91CF;&#x4E5F;&#x662F;&#x80FD;&#x591F;&#x88AB;&#x5B83;&#x8BBF;&#x95EE;&#x5230;&#x7684;&#x3002;<br><a id="more"></a></p>
+<h2 id="&#x4EC0;&#x4E48;&#x662F;&#x95ED;&#x5305;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x95ED;&#x5305;" class="headerlink" title="* &#x4EC0;&#x4E48;&#x662F;&#x95ED;&#x5305;"></a>* &#x4EC0;&#x4E48;&#x662F;&#x95ED;&#x5305;</h2><p>&#x95ED;&#x5305;(Closure)&#x662F;&#x8BA9;&#x5185;&#x90E8;&#x51FD;&#x6570;&#x80FD;&#x591F;&#x8BBF;&#x95EE;&#x5916;&#x90E8;&#x51FD;&#x6570;&#x4E2D;&#x7684;&#x53D8;&#x91CF;&#x3002;<br>&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;&#x95ED;&#x5305;&#x6817;&#x5B50;&#xFF1A;</p>
+<pre><code>function Closure{
+ var a = 1;// &#x5728;&#x6700;&#x7236;&#x51FD;&#x6570;&#x73AF;&#x5883;&#x4E2D;&#x5B9A;&#x4E49;&#x4E86;a
+ return function(){
+   a = 2;   // &#x7ED9;a&#x8D4B;&#x503C;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x5F53;&#x524D;&#x4F5C;&#x7528;&#x57DF;&#x4E2D;&#x5E76;&#x6CA1;&#x6709;&#x58F0;&#x660E;a&#x8FD9;&#x4E2A;&#x53D8;&#x91CF;
+ }
+}
+func = Closure(); // &#x8FD9;&#x65F6;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5373;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;
+func() // &#x5BF9;&#x91CC;&#x9762;&#x7684;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x8C03;&#x7528;&#xFF0C;&#x8FD9;&#x65F6;a&#x7684;&#x503C;&#x53D1;&#x751F;&#x4E86;&#x6539;&#x53D8;
+</code></pre><h2 id="&#x95ED;&#x5305;&#x7684;&#x4F5C;&#x7528;"><a href="#&#x95ED;&#x5305;&#x7684;&#x4F5C;&#x7528;" class="headerlink" title="* &#x95ED;&#x5305;&#x7684;&#x4F5C;&#x7528;"></a>* &#x95ED;&#x5305;&#x7684;&#x4F5C;&#x7528;</h2><p>&#x95ED;&#x5305;&#x7684;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x8BA9;&#x5185;&#x90E8;&#x51FD;&#x6570;&#x80FD;&#x591F;&#x8BBF;&#x95EE;&#x5230;&#x5916;&#x90E8;&#x53D8;&#x91CF;&#xFF0C;&#x5C31;&#x50CF;&#x4E0A;&#x9762;&#x4F8B;&#x5B50;&#x4E2D;&#x6240;&#x6F14;&#x793A;&#x7684;&#x6837;&#x5B50;&#x3002;<br>&#x95ED;&#x5305;&#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x8BA9;&#x4E00;&#x4E9B;&#x53D8;&#x91CF;&#x59CB;&#x7EC8;&#x4FDD;&#x5B58;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x770B;&#x4E0B;&#x9762;&#xFF1A;</p>
+<pre><code>function func(){
+ var a = 1;
+ function add(){
+   a++;
+ }
+ function ret(){
+   return a;
+ }
+ return {
+   ret:ret,
+   add:add
+ }
+}
+var f1 = func();
+f1.add();
+f1.add();
+console.log(f1.ret());
+</code></pre><p>&#x5728;&#x8FD9;&#x4E2A;&#x6817;&#x5B50;&#x4E2D;&#xFF0C;&#x51FD;&#x6570;&#x4E2D;&#x7684;&#x5B50;&#x51FD;&#x6570;add&#x4E00;&#x5171;&#x8FD0;&#x884C;&#x4E86;&#x4E24;&#x6B21;&#xFF0C;&#x5C06;a&#x7684;&#x503C;&#x4ECE;1&#x6539;&#x53D8;&#x5230;&#x4E86;3&#xFF0C;&#x7531;&#x4E8E;&#x7236;&#x51FD;&#x6570;&#x88AB;&#x8D4B;&#x7ED9;&#x4E86;&#x4E00;&#x4E2A;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x5C31;&#x4E00;&#x76F4;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5728;&#x8C03;&#x7528;&#x4E4B;&#x540E;&#x88AB;&#x81EA;&#x52A8;&#x6E05;&#x9664;&#x4E86;&#x3002;</p>
+<h2 id="&#x4F7F;&#x7528;&#x95ED;&#x5305;&#x7684;&#x6CE8;&#x610F;&#x70B9;"><a href="#&#x4F7F;&#x7528;&#x95ED;&#x5305;&#x7684;&#x6CE8;&#x610F;&#x70B9;" class="headerlink" title="* &#x4F7F;&#x7528;&#x95ED;&#x5305;&#x7684;&#x6CE8;&#x610F;&#x70B9;"></a>* &#x4F7F;&#x7528;&#x95ED;&#x5305;&#x7684;&#x6CE8;&#x610F;&#x70B9;</h2><p>&#x4E0A;&#x6587;&#x4E2D;&#x5DF2;&#x7ECF;&#x8BF4;&#x8FC7;&#xFF0C;&#x95ED;&#x5305;&#x7684;&#x7279;&#x70B9;&#x4E4B;&#x4E00;&#xFF0C;&#x4E5F;&#x662F;&#x6700;&#x4E3B;&#x8981;&#x7684;&#x7279;&#x70B9;&#x5C31;&#x662F;&#x51FD;&#x6570;&#x7684;&#x6240;&#x6709;&#x53D8;&#x91CF;&#x90FD;&#x4F1A;&#x88AB;&#x4FDD;&#x5B58;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#xFF0C;&#x90A3;&#x4E48;&#x8FD9;&#x4E9B;&#x53D8;&#x91CF;&#x5F53;&#x7136;&#x4E5F;&#x4F1A;&#x5360;&#x7528;&#x5185;&#x5B58;&#xFF0C;&#x5982;&#x679C;&#x95ED;&#x5305;&#x4F7F;&#x7528;&#x8FC7;&#x5EA6;&#x751A;&#x81F3;&#x6EE5;&#x7528;&#xFF0C;&#x5C31;&#x4F1A;&#x7ED9;&#x5185;&#x5B58;&#x9020;&#x6210;&#x5F88;&#x5927;&#x7684;&#x8D1F;&#x62C5;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x9020;&#x6210;&#x6027;&#x80FD;&#x95EE;&#x9898;&#x751A;&#x81F3;&#x9020;&#x6210;&#x5185;&#x5B58;&#x6CC4;&#x6F0F;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x4F7F;&#x7528;&#x5B8C;&#x6210;&#x95ED;&#x5305;&#x4E4B;&#x540E;&#x4E00;&#x5B9A;&#x8981;&#x624B;&#x52A8;&#x53BB;&#x6E05;&#x9664;&#x8FD9;&#x5757;&#x5185;&#x5B58;&#xFF0C;&#x907F;&#x514D;&#x5185;&#x5B58;&#x95EE;&#x9898;&#x7684;&#x51FA;&#x73B0;&#x3002;</p>
+<h1 id="&#x4E00;&#x4E2A;&#x95ED;&#x5305;&#x7684;&#x5B9E;&#x4F8B;-&#x5C01;&#x88C5;&#x7684;&#x6C7D;&#x8F66;&#x5BF9;&#x8C61;"><a href="#&#x4E00;&#x4E2A;&#x95ED;&#x5305;&#x7684;&#x5B9E;&#x4F8B;-&#x5C01;&#x88C5;&#x7684;&#x6C7D;&#x8F66;&#x5BF9;&#x8C61;" class="headerlink" title="&#x4E00;&#x4E2A;&#x95ED;&#x5305;&#x7684;&#x5B9E;&#x4F8B;(&#x5C01;&#x88C5;&#x7684;&#x6C7D;&#x8F66;&#x5BF9;&#x8C61;)"></a>&#x4E00;&#x4E2A;&#x95ED;&#x5305;&#x7684;&#x5B9E;&#x4F8B;(&#x5C01;&#x88C5;&#x7684;&#x6C7D;&#x8F66;&#x5BF9;&#x8C61;)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">var Car = carSet();</div><div class="line">function carSet(){</div><div class="line">  	var speed = 0;</div><div class="line">  	function setSpeed(spe){</div><div class="line">    	speed = spe;</div><div class="line">  	}</div><div class="line">  	function getSpeed(){</div><div class="line">    	console.log(speed);</div><div class="line">    	return speed;</div><div class="line">  	}</div><div class="line">  	function accelerate(){</div><div class="line">    	speed += 10;</div><div class="line">  	}</div><div class="line">  	function decelerate(){</div><div class="line">    	speed -= 10;</div><div class="line">  	}</div><div class="line">  	function getStatus(){</div><div class="line">    	if(speed === 0){</div><div class="line">     	 console.log(&quot;stop&quot;);</div><div class="line">      	return &quot;stop&quot;;</div><div class="line">    	}else{</div><div class="line">      	console.log(&quot;running&quot;);</div><div class="line">      	return &quot;running&quot;;</div><div class="line">    	}</div><div class="line">  	}</div><div class="line">  	return{</div><div class="line">    	setSpeed:setSpeed,</div><div class="line">    	getSpeed:getSpeed,</div><div class="line">    	decelerate:decelerate,</div><div class="line">    	getStatus:getStatus,</div><div class="line">    	accelerate:accelerate</div><div class="line">  	}</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x65F6;&#x5019;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E0B;&#x9762;&#x7684;&#x65B9;&#x5F0F;&#x53BB;&#x8BBF;&#x95EE;&#x548C;&#x8BBE;&#x7F6E;&#x901F;&#x5EA6;&#x503C;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Car.setSpeed(30);</div><div class="line">Car.getSpeed(); //30</div><div class="line">Car.accelerate();</div><div class="line">Car.getSpeed(); //40;</div><div class="line">Car.decelerate();</div><div class="line">Car.decelerate();</div><div class="line">Car.getSpeed(); //20</div><div class="line">Car.getStatus(); // &apos;running&apos;;</div><div class="line">Car.decelerate(); </div><div class="line">Car.decelerate();</div><div class="line">Car.getStatus();  //&apos;stop&apos;;</div><div class="line">//Car.speed;  //error</div></pre></td></tr></table></figure>
+<p><img src="/2016/08/05/&#x95ED;&#x5305;/2.jpg" alt="javascript"></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/闭包/" rel="tag">#闭包</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/01/图片测试/" rel="next" title="图片测试">
+                <i class="fa fa-chevron-left"></i> 图片测试
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/10/ajax/" rel="prev" title="前端开发之ajax">
+                前端开发之ajax <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img.woyaogexing.com/2016/01/04/a4c2b01e69c85dad!200x200.jpg"
+               alt="封富" />
+          <p class="site-author-name" itemprop="name">封富</p>
+          <p class="site-description motion-element" itemprop="description">来看看一个前端的路怎么走呀</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#谈谈闭包"><span class="nav-number">1.</span> <span class="nav-text">谈谈闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是闭包"><span class="nav-number">1.1.</span> <span class="nav-text">* 什么是闭包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包的作用"><span class="nav-number">1.2.</span> <span class="nav-text">* 闭包的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用闭包的注意点"><span class="nav-number">1.3.</span> <span class="nav-text">* 使用闭包的注意点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个闭包的实例-封装的汽车对象"><span class="nav-number">2.</span> <span class="nav-text">一个闭包的实例(封装的汽车对象)</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">封富</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
