@@ -289,6 +289,13 @@ $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/24/jQuery的常用方法和ajax/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/08/24/jQuery的常用方法和ajax/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -398,6 +405,13 @@ $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&
           
   <div class="comments" id="comments">
     
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
   </div>
 
 
@@ -440,7 +454,7 @@ $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -457,7 +471,7 @@ $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
@@ -631,6 +645,27 @@ $(document).ready()&amp;#x662F;&amp;#x7B49;&amp;#x5F85;&amp;#x9875;&amp;#x9762;&
 
 
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'your-disqus-shortname';
+      var disqus_identifier = '2016/08/24/jQuery的常用方法和ajax/';
+      var disqus_title = "jQuery的常见方法和ajax";
+      var disqus_url = 'http://yoursite.com/2016/08/24/jQuery的常用方法和ajax/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
 
