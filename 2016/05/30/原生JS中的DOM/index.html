@@ -1,0 +1,686 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript,原生,DOM," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6982;&amp;#x8FF0;DOM(&amp;#x6587;&amp;#x6863;&amp;#x5BF9;&amp;#x8C61;&amp;#x6A21;&amp;#x578B;)&amp;#x4F5C;&amp;#x4E3A;HTML&amp;#x3001;XML&amp;#x3001;SVG&amp;#x7B49;&amp;#x6807;&amp;#x8BB0;&amp;#x8BED;&amp;#x8A00;&amp;#x7684;&amp;#x4E00;&amp;#x79CD;&amp;#x7F16;&amp;#x7A0B;&amp;#x63A5;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="原生JS中的DOM">
+<meta property="og:url" content="http://yoursite.com/2016/05/30/原生JS中的DOM/index.html">
+<meta property="og:site_name" content="多彩">
+<meta property="og:description" content="&amp;#x6982;&amp;#x8FF0;DOM(&amp;#x6587;&amp;#x6863;&amp;#x5BF9;&amp;#x8C61;&amp;#x6A21;&amp;#x578B;)&amp;#x4F5C;&amp;#x4E3A;HTML&amp;#x3001;XML&amp;#x3001;SVG&amp;#x7B49;&amp;#x6807;&amp;#x8BB0;&amp;#x8BED;&amp;#x8A00;&amp;#x7684;&amp;#x4E00;&amp;#x79CD;&amp;#x7F16;&amp;#x7A0B;&amp;#x63A5;&amp;">
+<meta property="og:updated_time" content="2016-09-30T15:16:14.990Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="原生JS中的DOM">
+<meta name="twitter:description" content="&amp;#x6982;&amp;#x8FF0;DOM(&amp;#x6587;&amp;#x6863;&amp;#x5BF9;&amp;#x8C61;&amp;#x6A21;&amp;#x578B;)&amp;#x4F5C;&amp;#x4E3A;HTML&amp;#x3001;XML&amp;#x3001;SVG&amp;#x7B49;&amp;#x6807;&amp;#x8BB0;&amp;#x8BED;&amp;#x8A00;&amp;#x7684;&amp;#x4E00;&amp;#x79CD;&amp;#x7F16;&amp;#x7A0B;&amp;#x63A5;&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/05/30/原生JS中的DOM/"/>
+
+  <title> 原生JS中的DOM | 多彩 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">多彩</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                原生JS中的DOM
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-30T21:07:35+08:00" content="2016-05-30">
+              2016-05-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/30/原生JS中的DOM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/30/原生JS中的DOM/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="&#x6982;&#x8FF0;"><a href="#&#x6982;&#x8FF0;" class="headerlink" title="&#x6982;&#x8FF0;"></a>&#x6982;&#x8FF0;</h3><p>DOM(&#x6587;&#x6863;&#x5BF9;&#x8C61;&#x6A21;&#x578B;)&#x4F5C;&#x4E3A;HTML&#x3001;XML&#x3001;SVG&#x7B49;&#x6807;&#x8BB0;&#x8BED;&#x8A00;&#x7684;&#x4E00;&#x79CD;&#x7F16;&#x7A0B;&#x63A5;&#x53E3;&#xFF0C;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x79CD;&#x6811;&#x72B6;&#x7684;&#x8868;&#x793A;&#x65B9;&#x6CD5;(DOM&#x6811;)&#xFF0C;&#x5E76;&#x63D0;&#x4F9B;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x4E8B;&#x4EF6;&#x65B9;&#x6CD5;&#x6765;&#x6539;&#x53D8;&#x6587;&#x6863;&#x5185;&#x7684;&#x5185;&#x5BB9;&#x3001;&#x6837;&#x5F0F;&#x548C;&#x4E3A;&#x8FD9;&#x4E9B;&#x8282;&#x70B9;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;&#x4EA4;&#x4E92;&#x5185;&#x5BB9;&#x3002;<br>&#x4E00;&#x822C;&#x5982;&#x6211;&#x4EEC;&#x6240;&#x89C1;&#xFF0C;&#x7528;&#x6765;&#x64CD;&#x4F5C;DOM&#x7684;&#x662F;JavaScript&#xFF0C;&#x4F46;&#x662F;DOM&#x5E76;&#x4E0D;&#x662F;JavaScript&#x7684;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5176;&#x5B83;&#x8BED;&#x8A00;&#x6765;&#x64CD;&#x4F5C;DOM&#x3002;<br><a id="more"></a></p>
+<h3 id="&#x4E00;-&#x8282;&#x70B9;&#x7684;&#x589E;&#x5220;&#x6539;&#x67E5;"><a href="#&#x4E00;-&#x8282;&#x70B9;&#x7684;&#x589E;&#x5220;&#x6539;&#x67E5;" class="headerlink" title="&#x4E00;. &#x8282;&#x70B9;&#x7684;&#x589E;&#x5220;&#x6539;&#x67E5;"></a>&#x4E00;. &#x8282;&#x70B9;&#x7684;&#x589E;&#x5220;&#x6539;&#x67E5;</h3><p>&#x8981;&#x5BF9;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#x8282;&#x70B9;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF0C;&#x6700;&#x8D77;&#x7801;&#x8981;&#x80FD;&#x5F97;&#x5230;&#x8FD9;&#x4E2A;&#x8282;&#x70B9;&#xFF0C;&#x624D;&#x80FD;&#x8FDB;&#x884C;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5BF9;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x6700;&#x57FA;&#x7840;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;&#x5F53;&#x7136;&#x662F;&#x6765;&#x81EA;&#x5BF9;&#x8282;&#x70B9;&#x7684;&#x589E;&#x5220;&#x6539;&#x67E5;&#xFF1A;</p>
+<h6 id="&#x8282;&#x70B9;&#x7684;&#x67E5;&#x8BE2;"><a href="#&#x8282;&#x70B9;&#x7684;&#x67E5;&#x8BE2;" class="headerlink" title="&#x8282;&#x70B9;&#x7684;&#x67E5;&#x8BE2;"></a>&#x8282;&#x70B9;&#x7684;&#x67E5;&#x8BE2;</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">document.getElementById() // &#x901A;&#x8FC7;id&#x6765;&#x67E5;&#x8BE2;&#x8282;&#x70B9;</div><div class="line">document.getElementsByClassName() // &#x901A;&#x8FC7;&#x7C7B;&#x540D;&#x6765;&#x67E5;&#x8BE2;&#x8282;&#x70B9;</div><div class="line">document.getElementsByTagName() // &#x901A;&#x8FC7;&#x6807;&#x7B7E;&#x540D;&#x6765;&#x67E5;&#x8BE2;&#x8282;&#x70B9;</div></pre></td></tr></table></figure>
+<p>&#x5F53;&#x7136;&#xFF0C;&#x9664;&#x4E86;&#x4ECE;<code>document</code>&#x4E0A;&#x53BB;&#x83B7;&#x53D6;&#x8282;&#x70B9;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x4ECE;&#x7236;&#x8282;&#x70B9;&#x4E0A;&#x53BB;&#x83B7;&#x53D6;&#x5B50;&#x8282;&#x70B9;&#x3002;<br>&#x901A;&#x8FC7;&#x4EE5;&#x4E0A;&#x7684;&#x65B9;&#x5F0F;&#x80FD;&#x591F;&#x5F88;&#x65B9;&#x4FBF;&#x7684;&#x83B7;&#x53D6;&#x5230;DOM&#x5143;&#x7D20;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x8282;&#x70B9;&#xFF0C;&#x4F46;&#x65B9;&#x6CD5;&#x8F83;&#x591A;&#xFF0C;<code>ES5</code>&#x4E2D;&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x4E9B;&#x65B0;&#x7684;&#x4E1C;&#x897F;&#x6765;&#x5B8C;&#x6210;&#x9636;&#x6BB5;&#x7684;&#x67E5;&#x8BE2;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Element.querySelector();</div><div class="line">Element.querySelectorAll();</div></pre></td></tr></table></figure></p>
+<p>&#x5728;&#x4EE5;&#x4E0A;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x4E2D;&#xFF0C;&#x4EE5;<code>#id</code>&#x3001;<code>.class</code>&#x3001;<code>node</code>&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x67E5;&#x8BE2;&#x8282;&#x70B9;&#xFF0C;&#x7B2C;&#x4E00;&#x79CD;&#x67E5;&#x8BE2;&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684;&#x7684;&#x8282;&#x70B9;&#xFF0C;&#x4E00;&#x822C;&#x7528;&#x6765;&#x67E5;&#x8BE2;<code>id</code>&#x6216;&#x8005;&#x4E00;&#x4E9B;&#x53EA;&#x9700;&#x8981;&#x7B2C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x573A;&#x666F;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x5219;&#x662F;&#x67E5;&#x8BE2;&#x5230;&#x6240;&#x6709;&#x7B26;&#x5408;&#x6761;&#x4EF6;&#x7684;&#x8282;&#x70B9;&#xFF0C;&#x5E76;&#x4E14;&#x4EE5;&#x5BF9;&#x8C61;&#x7684;&#x5F62;&#x5F0F;&#x8FD4;&#x56DE;&#x6240;&#x6709;&#x7684;&#x5185;&#x5BB9;&#x3002;</p>
+<h6 id="&#x8282;&#x70B9;&#x7684;&#x589E;&#x52A0;"><a href="#&#x8282;&#x70B9;&#x7684;&#x589E;&#x52A0;" class="headerlink" title="&#x8282;&#x70B9;&#x7684;&#x589E;&#x52A0;"></a>&#x8282;&#x70B9;&#x7684;&#x589E;&#x52A0;</h6><p><code>createElement(node)</code> // &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x6807;&#x7B7E;<br><code>createTextNode()</code> // &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6587;&#x672C;&#x8282;&#x70B9;<br><code>node.setAttribute()</code> // &#x4E3A;&#x8282;&#x70B9;&#x6DFB;&#x52A0;&#x5C5E;&#x6027;<br>&#x901A;&#x8FC7;&#x4EE5;&#x4E0A;&#x65B9;&#x5F0F;&#x521B;&#x5EFA;&#x5B8C;&#x6210;&#x8282;&#x70B9;&#x5E76;&#x8BBE;&#x7F6E;&#x597D;&#x5BF9;&#x5E94;&#x5C5E;&#x6027;&#x540E;&#xFF0C;&#x518D;&#x5C06;&#x521B;&#x5EFA;&#x597D;&#x7684;&#x8282;&#x70B9;&#x6DFB;&#x52A0;&#x5230;<code>html</code>&#x7684;DOM&#x6811;&#x4E2D;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">parent.appendChild(child) // &#x5C06;&#x5B50;&#x5143;&#x7D20;&#x6DFB;&#x52A0;&#x5230;&#x7236;&#x5143;&#x7D20;&#x7684;&#x7684;&#x672B;&#x5C3E;</div><div class="line">parent.insertBefore(new,before) // &#x5C06;&#x5143;&#x7D20;&#x63D2;&#x5165;&#x5230;&#x7236;&#x5143;&#x7D20;&#x4E0B;&#x539F;&#x6765;&#x7684;&#x5143;&#x7D20;&#x4E4B;&#x524D;</div></pre></td></tr></table></figure></p>
+<p>&#x5176;&#x4F59;&#x63D2;&#x5165;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5176;&#x5B83;&#x65B9;&#x6CD5;&#x7684;&#x7EC4;&#x5408;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+<h6 id="&#x8282;&#x70B9;&#x7684;&#x5220;&#x9664;"><a href="#&#x8282;&#x70B9;&#x7684;&#x5220;&#x9664;" class="headerlink" title="&#x8282;&#x70B9;&#x7684;&#x5220;&#x9664;"></a>&#x8282;&#x70B9;&#x7684;&#x5220;&#x9664;</h6><p><code>parent.removeChild(child)</code> &#x5220;&#x9664;&#x5B50;&#x8282;&#x70B9;<br><code>ChildNode.remove()</code>&#x5C06;&#x81EA;&#x5DF1;&#x4ECE;&#x6240;&#x5728;&#x7684;DOM&#x6811;&#x4E2D;&#x5220;&#x9664;</p>
+<h6 id="&#x8282;&#x70B9;&#x7684;&#x4FEE;&#x6539;"><a href="#&#x8282;&#x70B9;&#x7684;&#x4FEE;&#x6539;" class="headerlink" title="&#x8282;&#x70B9;&#x7684;&#x4FEE;&#x6539;"></a>&#x8282;&#x70B9;&#x7684;&#x4FEE;&#x6539;</h6><p><code>parent.replaceChild(new,old)</code> // &#x5728;&#x7236;&#x5143;&#x7D20;&#x4E0B;&#x4F7F;&#x7528;&#x65B0;&#x7684;&#x8282;&#x70B9;&#x6765;&#x4EE3;&#x66FF;&#x65E7;&#x7684;&#x8282;&#x70B9;&#x3002;<br><code>Node.cloneNode(true)</code> // &#x514B;&#x9686;&#x4E00;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x4F20;&#x5165;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x4F7F;<code>false</code>&#x548C;<code>true</code>&#xFF0C;<code>false</code>&#x8868;&#x793A;&#x53EA;&#x514B;&#x9686;&#x672C;&#x8EAB;&#xFF0C;<code>true</code>&#x5219;&#x8868;&#x793A;&#x8981;&#x514B;&#x9686;&#x672C;&#x8EAB;&#x548C;&#x6240;&#x6709;&#x5B50;&#x8282;&#x70B9;</p>
+<h3 id="&#x4E8C;-DOM&#x4E8B;&#x4EF6;"><a href="#&#x4E8C;-DOM&#x4E8B;&#x4EF6;" class="headerlink" title="&#x4E8C;. DOM&#x4E8B;&#x4EF6;"></a>&#x4E8C;. DOM&#x4E8B;&#x4EF6;</h3><h5 id="DOM0-DOM1&#x7EA7;"><a href="#DOM0-DOM1&#x7EA7;" class="headerlink" title="DOM0/DOM1&#x7EA7;"></a>DOM0/DOM1&#x7EA7;</h5><p>&#x4E00;&#x822C;&#x6765;&#x8BB2;&#xFF0C;DOM0&#x548C;DOM1&#x90FD;&#x662F;&#x5BF9;&#x4E8B;&#x4EF6;&#x6240;&#x5BF9;&#x5E94;&#x51FD;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x4E00;&#x822C;&#x5C06;&#x5B83;&#x4EEC;&#x7684;&#x533A;&#x522B;&#x5B9A;&#x4E49;&#x4E3A;&#x662F;&#x5426;&#x4E3A;&#x5185;&#x8054;&#x6837;&#x5F0F;&#xFF1A;</p>
+<blockquote>
+<p>&#x5185;&#x8054;&#x5199;&#x6CD5;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;button onclick=function(){</div><div class="line">  console.log(&quot;hello world.&quot;);</div><div class="line">}&gt;btn&lt;button&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x975E;&#x5185;&#x8054;&#x5199;&#x6CD5;:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var btn = document.querySelector(&quot;btn&quot;);</div><div class="line">btn.onclick = function(){</div><div class="line">  console.log(&quot;hello wrold.&quot;);</div><div class="line">}</div></pre></td></tr></table></figure></p>
+</blockquote>
+<p>&#x8FD9;&#x79CD;&#x5BF9;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;&#x51FD;&#x6570;&#x7684;&#x64CD;&#x4F5C;&#x770B;&#x4F3C;&#x7B80;&#x5355;&#xFF0C;&#x4F46;&#x662F;&#x6709;&#x4E00;&#x70B9;&#xFF0C;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x51FD;&#x6570;&#x53EA;&#x80FD;&#x5199;&#x4E00;&#x6B21;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x672C;&#x8EAB;&#x662F;&#x51FD;&#x6570;&#xFF0C;&#x82E5;&#x662F;&#x5BF9;&#x5B83;&#x8FDB;&#x884C;&#x591A;&#x6B21;&#x7ED1;&#x5B9A;&#xFF0C;&#x540E;&#x9762;&#x7684;&#x51FD;&#x6570;&#x5C31;&#x4F1A;&#x8986;&#x76D6;&#x524D;&#x9762;&#x7684;&#x51FD;&#x6570;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x4F7F;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x65F6;&#x5E94;&#x8BE5;&#x8003;&#x8651;&#x5230;&#x5E94;&#x7528;&#x573A;&#x666F;&#x3002;<br>&#x53E6;&#x5916;&#xFF0C;&#x5185;&#x8054;&#x7684;&#x5199;&#x6CD5;&#x8BA9;JavaScript&#x4EE3;&#x7801;&#x4E0E;HTML&#x8026;&#x5408;&#xFF0C;&#x4E00;&#x822C;&#x6765;&#x8BB2;&#xFF0C;&#x4E0D;&#x63A8;&#x8350;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x540C;&#x6837;&#xFF0C;&#x4E5F;&#x4E0D;&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x5185;&#x8054;&#x6837;&#x5F0F;(&#x9898;&#x5916;&#x8BDD;)&#xFF0C;&#x5E76;&#x4E14;DOM&#x5E76;&#x672A;&#x88AB;W3C&#x6536;&#x5165;&#x6807;&#x51C6;&#x4E2D;&#x3002;</p>
+<h5 id="DOM2"><a href="#DOM2" class="headerlink" title="DOM2"></a>DOM2</h5><p>&#x5728;DOM0/1&#x4E2D;&#xFF0C;&#x662F;&#x5BF9;&#x4E8B;&#x4EF6;&#x6240;&#x5BF9;&#x5E94;&#x7684;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF0C;&#x4F46;&#x662F;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x66F4;&#x591A;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x8FD8;&#x5E94;&#x8BE5;&#x9700;&#x8981;&#x5BF9;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x540C;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x8FDB;&#x884C;&#x591A;&#x6B21;&#x7ED1;&#x5B9A;&#xFF0C;&#x6BD4;&#x5982;&#xFF0C;<code>document</code>&#x4E0A;&#x7684;&#x6EDA;&#x52A8;&#x4E8B;&#x4EF6;&#x4E00;&#x822C;&#x5C31;&#x4F1A;&#x9762;&#x4E34;&#x8BB8;&#x591A;&#x6B21;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x8FD9;&#x65F6;&#x5C31;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x5BF9;&#x4E8B;&#x4EF6;&#x5BF9;&#x5E94;&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x91CD;&#x5199;&#x64CD;&#x4F5C;&#xFF0C;&#x800C;&#x662F;&#x5E94;&#x8BE5;&#x5BF9;&#x5176;&#x4E8B;&#x4EF6;&#x672C;&#x8EAB;&#x8FDB;&#x884C;&#x64CD;&#x4F5C;&#xFF0C;&#x8FD9;&#x65F6;&#x5C31;&#x7528;&#x5230;&#x4E86;<code>addEventListener</code>&#x8FD9;&#x4E2A;&#x76D1;&#x542C;&#x4E8B;&#x4EF6;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">var btn = document.querySelector(&quot;#btn&quot;);</div><div class="line">btn.addEventListener(&quot;click&quot;,function(){</div><div class="line">  console.log(&quot;hello&quot;);</div><div class="line">})</div><div class="line">btn.addEventListener(&quot;click&quot;,function(){</div><div class="line">  console.log(&quot;world&quot;);</div><div class="line">  })</div></pre></td></tr></table></figure></p>
+<p>&#x4F7F;&#x7528;DOM2&#x7684;&#x65B9;&#x5F0F;&#x5C31;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x540C;&#x65F6;&#x5728;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x8EAB;&#x4E0A;&#x7ED1;&#x5B9A;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#x3002;<br>&#x5728;<code>addEventListener()</code>&#x4E2D;&#xFF0C;&#x5176;&#x5B9E;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x6765;&#x8BF4;&#x660E;&#x662F;&#x5426;&#x5728;&#x6355;&#x83B7;(Capture)&#x9636;&#x6BB5;&#x6267;&#x884C;&#x5904;&#x7406;&#x51FD;&#x6570;&#xFF0C;&#x5176;&#x9ED8;&#x8BA4;&#x503C;&#x4E3A;false&#xFF0C;&#x4EE3;&#x8868;&#x4F7F;&#x7528;&#x5192;&#x6CE1;(Bubbling)&#x65B9;&#x5F0F;&#x3002;<br>&#x5192;&#x6CE1;&#x4EE3;&#x8868;&#x4ECE;&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;&#x7684;DOM&#x5143;&#x7D20;&#x672C;&#x8EAB;&#x5411;&#x4E0A;&#x5192;&#x6CE1;&#xFF0C;&#x76F4;&#x5230;document&#xFF1B;&#x800C;&#x6355;&#x83B7;&#x65B9;&#x5F0F;&#x7684;&#x67E5;&#x627E;&#x987A;&#x5E8F;&#x6B63;&#x597D;&#x76F8;&#x53CD;&#x3002;<br>&#x4E0E;<code>addEventListener</code>&#x76F8;&#x53CD;&#xFF0C;<code>removeEventListener</code>&#x662F;&#x7528;&#x6765;&#x89E3;&#x7ED1;&#x5143;&#x7D20;&#x7684;&#x4E8B;&#x4EF6;&#x7684;&#x3002;<br>&#x5728;&#x4F4E;&#x7248;&#x672C;<code>IE</code>&#x4E0B;&#xFF0C;&#x4E0D;&#x652F;&#x6301;&#x4EE5;&#x4E0A;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#xFF0C;&#x5219;&#x4F7F;&#x7528;<code>attachEvent</code>&#x548C;<code>detachEvent</code>&#x6765;&#x5B8C;&#x6210;&#x4E8B;&#x4EF6;&#x7684;&#x7ED1;&#x5B9A;&#x548C;&#x89E3;&#x7ED1;&#xFF0C;&#x4E0E;&#x524D;&#x8005;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;&#x5B83;&#x7684;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x51FD;&#x6570;&#x4F1A;&#x5728;&#x5168;&#x5C40;&#x4F5C;&#x7528;&#x57DF;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;<code>window</code>&#x4E0B;&#x8FDB;&#x884C;&#x3002;<br>&#x6B64;&#x5916;&#xFF0C;<code>addEventListener</code>&#x5728;&#x9700;&#x8981;&#x7528;&#x5230;&#x4E8B;&#x4EF6;&#x4EE3;&#x7406;&#x7684;&#x573A;&#x666F;&#x4E0B;&#x4E5F;&#x80FD;&#x51F8;&#x663E;&#x51FA;&#x5B83;&#x7684;&#x4F18;&#x52BF;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var ul = document.quertSelector(&quot;ul&quot;);</div><div class="line">ul.addEventListener(&quot;click&quot;,function(){</div><div class="line">  if(e.target.tagName.toLowerCase() === &apos;li&apos;){</div><div class="line">      console.log(e.target.innerText);</div><div class="line">  }</div><div class="line">})</div></pre></td></tr></table></figure></p>
+<h5 id="DOM3"><a href="#DOM3" class="headerlink" title="DOM3"></a>DOM3</h5><p>DOM3&#x5728;DOM2&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x589E;&#x52A0;&#x4E86;&#x5F88;&#x591A;&#x65B0;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x5E76;&#x5C06;&#x4E8B;&#x4EF6;&#x7ED9;&#x8FDB;&#x884C;&#x4E86;&#x5206;&#x7C7B;&#xFF0C;&#x6BD4;&#x5982;&#x9F20;&#x6807;&#x4E8B;&#x4EF6;&#xFF0C;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#xFF0C;&#x6EDA;&#x8F6E;&#x4E8B;&#x4EF6;&#xFF0C;&#x89E6;&#x6478;&#x4E8B;&#x4EF6;&#x7B49;&#xFF0C;&#x5E76;&#x589E;&#x52A0;&#x4E00;&#x4E9B;&#x81EA;&#x5B9A;&#x4E49;&#x4E8B;&#x4EF6;&#xFF0C;&#x5176;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#x548C;DOM2&#x76F8;&#x540C;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/原生/" rel="tag">#原生</a>
+          
+            <a href="/tags/DOM/" rel="tag">#DOM</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/25/hexo折腾记/" rel="next" title="hexo折腾记">
+                <i class="fa fa-chevron-left"></i> hexo折腾记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/01/图片测试/" rel="prev" title="test and some note">
+                test and some note <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/30/原生JS中的DOM/"
+           data-title="原生JS中的DOM" data-url="http://yoursite.com/2016/05/30/原生JS中的DOM/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img.woyaogexing.com/2016/01/04/a4c2b01e69c85dad!200x200.jpg"
+               alt="封富" />
+          <p class="site-author-name" itemprop="name">封富</p>
+          <p class="site-description motion-element" itemprop="description">来看看一个前端的路怎么走呀</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/feng-fu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/83d06f63b103/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-simplybuilt"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1802702177/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:fengfu2016@gmail.com" target="_blank" title="gmail">
+                  
+                    <i class="fa fa-fw fa-envelope-o"></i>
+                  
+                  gmail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一-节点的增删改查"><span class="nav-number">2.</span> <span class="nav-text">一. 节点的增删改查</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#节点的查询"><span class="nav-number">2.0.0.1.</span> <span class="nav-text">节点的查询</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#节点的增加"><span class="nav-number">2.0.0.2.</span> <span class="nav-text">节点的增加</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#节点的删除"><span class="nav-number">2.0.0.3.</span> <span class="nav-text">节点的删除</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#节点的修改"><span class="nav-number">2.0.0.4.</span> <span class="nav-text">节点的修改</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二-DOM事件"><span class="nav-number">3.</span> <span class="nav-text">二. DOM事件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM0-DOM1级"><span class="nav-number">3.0.1.</span> <span class="nav-text">DOM0/DOM1级</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM2"><span class="nav-number">3.0.2.</span> <span class="nav-text">DOM2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DOM3"><span class="nav-number">3.0.3.</span> <span class="nav-text">DOM3</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">封富</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<!--<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>-->
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengfu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
