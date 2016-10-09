@@ -1,0 +1,680 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript,function,变量," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="##&amp;#x3000;&amp;#x5F15;&amp;#x8A00;&amp;#x5728;JavaScript&amp;#x4E2D;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x53EF;&amp;#x4EE5;&amp;#x5728;&amp;#x524D;&amp;#x9762;&amp;#x6B63;&amp;#x5E38;&amp;#x8C03;&amp;#x7528;&amp;#x540E;&amp;#x9762;&amp;#x58F0;&amp;#x660E;&amp;#x7684;&amp;#x51FD;&amp;#x6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数提升和变量声明前置">
+<meta property="og:url" content="http://yoursite.com/2016/07/09/函数提升和变量声明前置/index.html">
+<meta property="og:site_name" content="多彩">
+<meta property="og:description" content="##&amp;#x3000;&amp;#x5F15;&amp;#x8A00;&amp;#x5728;JavaScript&amp;#x4E2D;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x53EF;&amp;#x4EE5;&amp;#x5728;&amp;#x524D;&amp;#x9762;&amp;#x6B63;&amp;#x5E38;&amp;#x8C03;&amp;#x7528;&amp;#x540E;&amp;#x9762;&amp;#x58F0;&amp;#x660E;&amp;#x7684;&amp;#x51FD;&amp;#x6">
+<meta property="og:updated_time" content="2016-10-09T12:05:32.076Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="函数提升和变量声明前置">
+<meta name="twitter:description" content="##&amp;#x3000;&amp;#x5F15;&amp;#x8A00;&amp;#x5728;JavaScript&amp;#x4E2D;&amp;#xFF0C;&amp;#x6211;&amp;#x4EEC;&amp;#x53EF;&amp;#x4EE5;&amp;#x5728;&amp;#x524D;&amp;#x9762;&amp;#x6B63;&amp;#x5E38;&amp;#x8C03;&amp;#x7528;&amp;#x540E;&amp;#x9762;&amp;#x58F0;&amp;#x660E;&amp;#x7684;&amp;#x51FD;&amp;#x6">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/07/09/函数提升和变量声明前置/"/>
+
+  <title> 函数提升和变量声明前置 | 多彩 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">多彩</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                函数提升和变量声明前置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-09T19:19:35+08:00" content="2016-07-09">
+              2016-07-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/09/函数提升和变量声明前置/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/09/函数提升和变量声明前置/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>##&#x3000;&#x5F15;&#x8A00;<br>&#x5728;JavaScript&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x524D;&#x9762;&#x6B63;&#x5E38;&#x8C03;&#x7528;&#x540E;&#x9762;&#x58F0;&#x660E;&#x7684;&#x51FD;&#x6570;&#x800C;&#x4E0D;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x5F53;&#x6211;&#x4EEC;&#x53BB;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#x65F6;&#xFF0C;&#x65E0;&#x8BBA;&#x8FD9;&#x65F6;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x5728;&#x4F55;&#x65B9;&#xFF0C;&#x90FD;&#x4E0D;&#x4F1A;&#x544A;&#x8BC9;&#x6211;&#x4EEC;<code>xx is not define</code>&#xFF0C;&#x6700;&#x591A;&#x7ED9;&#x51FA;&#x4E00;&#x4E2A;<code>undefined</code>&#xFF0C;&#x8FD9;&#x4E9B;&#x60C5;&#x5F62;&#x4E4B;&#x6240;&#x4EE5;&#x4F1A;&#x53D1;&#x751F;&#xFF0C;&#x53EA;&#x662F;&#x56E0;&#x4E3A;&#x5728;JavaScript&#x4E2D;&#x5B58;&#x5728;&#x7740;&#x53D8;&#x91CF;&#x63D0;&#x5347;&#x548C;&#x58F0;&#x660E;&#x524D;&#x7F6E;&#x8FD9;&#x6837;&#x7684;&#x4E1C;&#x897F;&#x3002;<br><a id="more"></a></p>
+<h2 id="&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x524D;&#x7F6E;"><a href="#&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x524D;&#x7F6E;" class="headerlink" title="&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x524D;&#x7F6E;"></a>&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x524D;&#x7F6E;</h2><p>&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6211;&#x4EEC;&#x8FD9;&#x6837;&#x53BB;&#x505A;&#x53D8;&#x91CF;&#x7684;&#x58F0;&#x660E;&#x548C;&#x4F7F;&#x7528;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var a = &quot;hello world.&quot;;</div><div class="line">console.log(a);</div></pre></td></tr></table></figure></p>
+<p>&#x5728;&#x8FD9;&#x91CC;&#x5F53;&#x7136;&#x80FD;&#x591F;&#x6B63;&#x5E38;&#x7684;&#x8F93;&#x51FA;<code>a</code>&#x4E3A;<code>hello world.</code>&#xFF0C;&#x8FD9;&#x4E00;&#x70B9;&#x662F;&#x6BCB;&#x5EB8;&#x7F6E;&#x7591;&#x7684;&#x3002;<br>&#x800C;&#x5F53;&#x6211;&#x4EEC;&#x8981;&#x76F4;&#x63A5;&#x53BB;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x672A;&#x7ECF;&#x58F0;&#x660E;&#x7684;&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x5219;&#x4F1A;&#x62A5;&#x9519;&#xFF1A;<br><code>console.log(c)</code><br>&#x5728;&#x8FD9;&#x91CC;<code>c</code>&#x5728;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x90FD;&#x672A;&#x51FA;&#x73B0;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x6D4F;&#x89C8;&#x5668;&#x4E5F;&#x6DF1;&#x77E5;&#x8FD9;&#x4E00;&#x70B9;&#xFF0C;&#x6240;&#x4EE5;&#x4F1A;&#x7528;&#x4E00;&#x4E32;&#x7EA2;&#x8272;&#x7684;&#x8B66;&#x544A;&#x6765;&#x544A;&#x8BC9;&#x6211;&#x4EEC;<code>c is not define</code><br>&#x90A3;&#x4E48;&#xFF0C;&#x5982;&#x679C;&#x6211;&#x4EEC;&#x5148;&#x4F7F;&#x7528;&#x53D8;&#x91CF;&#x4E4B;&#x540E;&#x518D;&#x53BB;&#x8FDB;&#x884C;&#x58F0;&#x660E;&#x53C8;&#x4F1A;&#x51FA;&#x73B0;&#x600E;&#x6837;&#x7684;&#x7ED3;&#x679C;&#x5462;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">console.log(d);</div><div class="line">var d = &quot;hello JavaScript.&quot;;</div></pre></td></tr></table></figure></p>
+<p>&#x6211;&#x4EEC;&#x4F1A;&#x53D1;&#x73B0;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;&#x7ED3;&#x679C;&#x5E76;&#x4E0D;&#x662F;&#x4E00;&#x4E32;&#x7EA2;&#x8272;&#x7684;&#x62A5;&#x9519;&#xFF0C;&#x4E5F;&#x4E0D;&#x662F;&#x6211;&#x4EEC;&#x5728;&#x540E;&#x9762;&#x5199;&#x8FC7;&#x7684;<code>hello JavaScript.</code>&#xFF0C;&#x800C;&#x662F;&#x8F93;&#x51FA;&#x4E00;&#x4E2A;undefined&#xFF0C;&#x8FD9;&#x4E0E;&#x6211;&#x4EEC;&#x524D;&#x9762;&#x7684;&#x8BD5;&#x9A8C;&#x7ED3;&#x679C;&#x76F8;&#x6096;&#xFF0C;&#x8FD9;&#x91CC;&#x5C31;&#x5FC5;&#x987B;&#x63D0;&#x5230;JavaScript&#x4E2D;&#x5173;&#x4E8E;&#x53D8;&#x91CF;&#x63D0;&#x5347;&#x4E86;&#x3002;<br>&#x4EC0;&#x4E48;&#x662F;&#x53D8;&#x91CF;&#x63D0;&#x5347;&#x5462;&#xFF0C;&#x987E;&#x540D;&#x601D;&#x4E49;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#xFF0C;&#x53D8;&#x91CF;&#x88AB;&#x63D0;&#x5230;&#x524D;&#x9762;&#x53BB;&#x4E86;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x53C8;&#x662F;&#x600E;&#x4E48;&#x63D0;&#x5347;&#x7684;&#x5462;&#xFF0C;&#x6839;&#x636E;&#x524D;&#x9762;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#x53EF;&#x4EE5;&#x5F97;&#x51FA;&#xFF0C;&#x4ED6;&#x7EDD;&#x4E0D;&#x662F;&#x5168;&#x90E8;&#x63D0;&#x5347;&#xFF0C;&#x5426;&#x5219;&#x524D;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x5C31;&#x4F1A;&#x8F93;&#x51FA;<code>hello JavaScript.</code>&#x800C;&#x4E0D;&#x662F;<code>undefined</code>&#x4E86;&#xFF0C;&#x6839;&#x636E;&#x53D8;&#x91CF;&#x63D0;&#x5347;&#xFF0C;&#x524D;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x4F1A;&#x88AB;&#x89E3;&#x6790;&#x6210;&#x8FD9;&#x6837;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var d;</div><div class="line">console.log(d);</div><div class="line">d = &quot;hello JavaScript.&quot;;</div></pre></td></tr></table></figure></p>
+<p>&#x4EE5;&#x6B64;&#x987A;&#x5E8F;&#x89E3;&#x6790;&#xFF0C;&#x5728;&#x7B2C;&#x4E00;&#x884C;&#xFF0C;&#x58F0;&#x660E;&#x4E86;<code>d</code>&#xFF0C;&#x4F46;&#x662F;&#x6CA1;&#x6709;&#x8D4B;&#x503C;&#xFF0C;&#x6240;&#x4EE5;&#x5B83;&#x7684;&#x503C;&#x5C31;&#x88AB;&#x9ED8;&#x8BA4;&#x4E3A;<code>undefined</code>&#xFF0C;&#x6240;&#x4EE5;&#x7B2C;&#x4E8C;&#x884C;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x4E3A;<code>undefined</code>&#xFF0C;&#x5728;&#x7B2C;&#x4E09;&#x884C;&#x624D;&#x662F;&#x591A;&#x5176;&#x8FDB;&#x884C;&#x8D4B;&#x503C;&#x3002;<br>&#x6839;&#x636E;&#x4EE5;&#x4E0A;&#xFF0C;&#x4F46;&#x6211;&#x4EEC;&#x5728;&#x53BB;&#x770B;&#x4E00;&#x884C;&#x4EE3;&#x7801;&#x7684;&#x8F93;&#x51FA;&#x65F6;&#xFF0C;&#x5E94;&#x8BE5;&#x5148;&#x5BF9;&#x5176;&#x4E2D;&#x5148;&#x540E;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x62C6;&#x89E3;&#xFF0C;&#x624D;&#x80FD;&#x5206;&#x6790;&#x5F97;&#x51FA;&#x5176;&#x4E2D;&#x7684;&#x503C;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">console.log(a);</div><div class="line">var a = 1;</div><div class="line">console.log(a);</div><div class="line">console.log(b);</div><div class="line">b = 10;</div></pre></td></tr></table></figure></p>
+<p>&#x6839;&#x636E;&#x4EE5;&#x4E0A;&#x539F;&#x5219;&#x5BF9;&#x51FD;&#x6570;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x91CD;&#x65B0;&#x6392;&#x5217;&#xFF0C;&#x5F97;&#x5230;&#x8FD9;&#x6837;&#x7684;&#x7ED3;&#x679C;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var a;</div><div class="line">console.log(a); // undefined</div><div class="line">a = 1;</div><div class="line">console.log(a); // 1</div><div class="line">console.log(b); // &#x62A5;&#x9519; b is not define.</div><div class="line">b = 10;</div></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x6B64;&#xFF0C;&#x7ED3;&#x679C;&#x4FBF;&#x4E00;&#x76EE;&#x4E86;&#x7136;&#x4E86;&#x2026;</p>
+<h2 id="&#x51FD;&#x6570;&#x63D0;&#x5347;"><a href="#&#x51FD;&#x6570;&#x63D0;&#x5347;" class="headerlink" title="&#x51FD;&#x6570;&#x63D0;&#x5347;"></a>&#x51FD;&#x6570;&#x63D0;&#x5347;</h2><p>&#x5BF9;&#x4E8E;&#x51FD;&#x6570;&#x800C;&#x8A00;&#xFF0C;&#x5176;&#x5B9E;&#x8FD9;&#x53C8;&#x6709;&#x4E00;&#x70B9;&#x4E0D;&#x4E00;&#x6837;&#x4E86;&#xFF0C;&#x4F46;&#x662F;&#x6839;&#x636E;&#x4EE5;&#x4E0A;&#x539F;&#x5219;&#x8FDB;&#x884C;&#x8BD5;&#x9A8C;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5F97;&#x51FA;&#x7ED3;&#x8BBA;&#x4E86;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">console.log(func());</div><div class="line">function func(){</div><div class="line">  return &quot;hello world.&quot;;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x679C;&#x4F60;&#x771F;&#x7684;&#x53BB;&#x8BD5;&#x4E86;&#xFF0C;&#x4F60;&#x5C31;&#x4F1A;&#x53D1;&#x73B0;&#x5B83;&#x8F93;&#x51FA;&#x7684;&#x503C;&#x662F;<code>hello world.</code>&#xFF0C;&#x6B63;&#x5E38;&#x5C06;&#x51FD;&#x6570;&#x6267;&#x884C;&#x5B8C;&#x6210;&#x4E86;&#xFF0C;&#x8FD9;&#x4E5F;&#x8BA9;&#x6211;&#x4EEC;&#x5F97;&#x4EE5;&#x77E5;&#x9053;&#x51FD;&#x6570;&#x63D0;&#x5347;&#x548C;&#x53D8;&#x91CF;&#x58F0;&#x660E;&#x524D;&#x7F6E;&#x4E4B;&#x95F4;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x5176;&#x5B9E;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function func(){</div><div class="line">  return &quot;hello world.&quot;;</div><div class="line">}</div><div class="line">console.log(func());</div></pre></td></tr></table></figure></p>
+<p>&#x8FD9;&#x548C;&#x6B63;&#x5E38;&#x6267;&#x884C;&#x987A;&#x5E8F;&#x6CA1;&#x4EC0;&#x4E48;&#x4E24;&#x6837;&#xFF0C;&#x5B83;&#x7684;&#x89E3;&#x6790;&#x65B9;&#x5F0F;&#x4E5F;&#x548C;&#x524D;&#x9762;&#x63D0;&#x5230;&#x7684;&#x76F8;&#x540C;&#xFF0C;&#x5C31;&#x662F;&#x5C06;&#x4EE3;&#x7801;&#x7684;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x91CD;&#x6392;&#xFF0C;&#x4E00;&#x5207;&#x5C31;&#x5B8C;&#x5168;&#x5728;&#x773C;&#x524D;&#x4E86;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">foo();</div><div class="line">bar();</div><div class="line">function foo(){</div><div class="line">  console.log(&quot;hello&quot;);</div><div class="line">}</div><div class="line">var bar = funciton(){</div><div class="line">  console.log(&quot;world&quot;);</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x65B9;&#x6CD5;&#x5982;&#x524D;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">var bar;</div><div class="line">function foo(){</div><div class="line">  console.log(&quot;hello&quot;);</div><div class="line">}</div><div class="line">foo();</div><div class="line">bar();</div><div class="line">bar = function(){</div><div class="line">  console.log(&quot;world&quot;);</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x4EE5;&#x4E0A;&#x4EE3;&#x7801;&#x5176;&#x5B9E;&#x4F1A;&#x56E0;&#x4E3A;&#x8BED;&#x6CD5;&#x9519;&#x8BEF;&#x800C;&#x62A5;&#x9519;&#xFF0C;&#x56E0;&#x4E3A;<code>bar</code>&#x4E0D;&#x518D;&#x662F;&#x51FD;&#x6570;&#x58F0;&#x660E;&#xFF0C;&#x800C;&#x662F;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x8FD9;&#x4E5F;&#x5C31;&#x5BFC;&#x81F4;&#x4E86;&#x51FD;&#x6570;&#x63D0;&#x5347;&#x7684;&#x89C4;&#x5219;&#x4E0D;&#x4F1A;&#x5E94;&#x7528;&#x5230;&#x5B83;&#x8EAB;&#x4E0A;&#xFF0C;&#x8FD9;&#x65F6;&#x76F4;&#x63A5;&#x8FD0;&#x884C;<code>bar()</code>&#x5C31;&#x4F1A;&#x62A5;&#x9519;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
+          
+            <a href="/tags/function/" rel="tag">#function</a>
+          
+            <a href="/tags/变量/" rel="tag">#变量</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/30/原生JS中的DOM/" rel="next" title="原生JS中的DOM">
+                <i class="fa fa-chevron-left"></i> 原生JS中的DOM
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/10/ajax/" rel="prev" title="前端开发之ajax">
+                前端开发之ajax <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/09/函数提升和变量声明前置/"
+           data-title="函数提升和变量声明前置" data-url="http://yoursite.com/2016/07/09/函数提升和变量声明前置/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://img.woyaogexing.com/2016/01/04/a4c2b01e69c85dad!200x200.jpg"
+               alt="封富" />
+          <p class="site-author-name" itemprop="name">封富</p>
+          <p class="site-description motion-element" itemprop="description">来看看一个前端的路怎么走呀</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/feng-fu" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/users/83d06f63b103/latest_articles" target="_blank" title="简书">
+                  
+                    <i class="fa fa-fw fa-simplybuilt"></i>
+                  
+                  简书
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1802702177/profile?rightmod=1&wvr=6&mod=personinfo" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:fengfu2016@gmail.com" target="_blank" title="gmail">
+                  
+                    <i class="fa fa-fw fa-envelope-o"></i>
+                  
+                  gmail
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量声明前置"><span class="nav-number">1.</span> <span class="nav-text">变量声明前置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数提升"><span class="nav-number">2.</span> <span class="nav-text">函数提升</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">封富</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<!--<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>-->
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"fengfu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
